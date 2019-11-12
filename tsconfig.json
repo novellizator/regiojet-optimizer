@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "esnext",
+      "rootDir": "src",
+      "outDir": "dist",
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+      "lib": ["esnext", "dom"],
+      "esModuleInterop": true
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
