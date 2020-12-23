@@ -7,7 +7,9 @@ This app should automatize this.
 Run `npm install` first.
 
 `npm run search praha ostr 2`
+
 Searches all routes with 2 segments (1 transfer) from ostrava to praha. Notice the fulll text search in the name of the city.
 
 `npm run search praha ostr 1`
+
 Searches the direct line from prague to ostrava (1 segment = 0 transfers)
