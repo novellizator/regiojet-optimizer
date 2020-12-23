@@ -3,7 +3,6 @@ export type Locations = Country[]
 export interface Country {
     country: String
     cities: City[]
-    //[key: string]: unknown
 }
 
 export interface City {
@@ -11,11 +10,21 @@ export interface City {
     name: string
     aliases: string[]
     stations: Station[]
-    //[key: string]: unknown
 }
 
 export interface Station {
     id: number
     name: string
-    //[key: string]: unknown
+}
+
+export interface LocationDefinition {
+    id: number
+    type: "STATION" | "CITY"
+}
+
+export function cityToLocationDefinition(city: City): LocationDefinition {
+    return {
+        id: city.id,
+        type: 'CITY'
+    }
 }

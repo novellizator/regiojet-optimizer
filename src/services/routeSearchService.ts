@@ -1,25 +1,24 @@
 import { Route, RouteSearchResult } from '../types/routeSearchRoutes';
 import routeSearchResult from '../mocks/route-search.json'
-
-//  "https://brn-ybus-pubapi.sa.cz/restapi/routes/search/simple?departureDate=2020-12-20&fromLocationId=372825000&fromLocationType=STATION&locale=cs&tariffs=REGULAR&toLocationId=1763018007&toLocationType=STATION",
-
+import axios from 'axios'
+import { LocationDefinition } from '../types/locations';
 interface RoutesFetching {
     fetchRouteForDate(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<Route[]>
     fetchRouteForDateTime(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<Route[]>
 }
 
-export interface LocationDefinition {
-    id: number
-    type: "STATION" | "CITY"
-}
-interface LocationItem extends LocationDefinition{
+interface LocationItem extends LocationDefinition {
     direction: 'from' | 'to'
 }
 
 export class RouteSearchService implements RoutesFetching {
     private async fetchRawRoute(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<RouteSearchResult> {
         const uri = generateUri(departureDate, fromLocation, toLocation)
-        return fetch(uri).then(response => response.json() as Promise<RouteSearchResult>)
+        return axios.get(uri,{
+            headers: {
+                'X-Currency': 'CZK'
+            }
+        }).then(response => response.data)
     }
 
     fetchRouteForDate = async (departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition) => {
@@ -64,7 +63,7 @@ function locationItemToUriString(locationItem: LocationItem) {
 // shaves off the time
 function dateToUriString(date: Date) {
     const year = date.getFullYear()
-    const month = prefixByZeroIfNeeded(date.getMonth())
+    const month = prefixByZeroIfNeeded(date.getMonth() + 1) // 0-11
     const day = prefixByZeroIfNeeded(date.getDate())
     return `${year}-${month}-${day}`
 }

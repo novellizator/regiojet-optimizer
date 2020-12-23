@@ -17,8 +17,3 @@ export class LocationsProvider {
     }
 }
 export const mockLocationsProvider = new LocationsProvider(locations)
-
-
-
-console.log("lc provider!")
-console.log(mockLocationsProvider.findCity("rag"))

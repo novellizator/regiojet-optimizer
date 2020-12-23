@@ -1,13 +1,13 @@
 import { divideIntoSegments, Segmentation } from "./segmentDivider"
-import { LocationDefinition, MockRouteSearchService } from "./services/routeSearchService"
+import { RouteSearchService } from "./services/routeSearchService"
 import { MockTimetableService } from "./services/timetableService"
-import { Locations } from "./types/locations"
+import { LocationDefinition } from "./types/locations"
 import { RouteSearchResult, Route } from "./types/routeSearchRoutes"
 import { TimetableStation } from "./types/timetable"
 import { promiseAllResolved } from "./utils"
 
 
-const routeSearchService = new MockRouteSearchService()
+const routeSearchService = new RouteSearchService()
 const timetableService = new MockTimetableService()
 
 function routeDepartureLaterThan(date: Date) {
