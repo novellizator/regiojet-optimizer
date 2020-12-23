@@ -35,3 +35,19 @@ export function stripDiacritics(text: string) {
 
     }).join('')
 }
+
+function prefixByZeroIfNeeded(number: number) {
+    return `${number < 10 ? "0":'' }${number}`
+}
+// 2020-12-20
+// shaves off the time
+export function dateToUriString(date: Date) {
+    const year = date.getFullYear()
+    const month = prefixByZeroIfNeeded(date.getMonth() + 1) // 0-11
+    const day = prefixByZeroIfNeeded(date.getDate())
+    return `${year}-${month}-${day}`
+}
+
+export function dateToTime(date: Date) {
+    return `${date.getHours()}:${date.getMinutes()}`
+}

@@ -2,6 +2,7 @@ import { Route, RouteSearchResult } from '../types/routeSearchRoutes';
 import routeSearchResult from '../mocks/route-search.json'
 import axios from 'axios'
 import { LocationDefinition } from '../types/locations';
+import { dateToUriString } from '../utils';
 interface RoutesFetching {
     fetchRouteForDate(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<Route[]>
     fetchRouteForDateTime(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<Route[]>
@@ -57,19 +58,6 @@ export function generateUri(departureDate: Date, fromLocation: LocationDefinitio
 
 function locationItemToUriString(locationItem: LocationItem) {
     return `${locationItem.direction}LocationId=${locationItem.id}&${locationItem.direction}LocationType=${locationItem.type}`
-}
-
-// 2020-12-20
-// shaves off the time
-function dateToUriString(date: Date) {
-    const year = date.getFullYear()
-    const month = prefixByZeroIfNeeded(date.getMonth() + 1) // 0-11
-    const day = prefixByZeroIfNeeded(date.getDate())
-    return `${year}-${month}-${day}`
-}
-
-function prefixByZeroIfNeeded(number: number) {
-    return `${number < 10 ? "0":'' }${number}`
 }
 
 function routeDepartureLaterThan(date: Date) {
