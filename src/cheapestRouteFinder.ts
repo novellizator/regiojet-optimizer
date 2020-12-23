@@ -48,11 +48,11 @@ export async function allRoutePathsForSegmentations(fromLocation: LocationDefini
         throw Error("No canonical route found")
     }
 
-    let timetableForRoute = await timetableService.fetchTimetableForRoute(firstViableRoute.id)
-    let stationsOnRoute = timetableForRoute.stations
-    let segmentations = divideIntoSegments(0, stationsOnRoute.length - 1, numberOfSegments)
-    let routePathsForSegmentationsPromise = segmentations.map(segmentation => findRoutePathForSegmentation(segmentation, stationsOnRoute, departureDate))
-    let routePathsForSegmentations = await promiseAllResolved(routePathsForSegmentationsPromise)
+    const timetableForRoute = await timetableService.fetchTimetableForRoute(firstViableRoute.id)
+    const stationsOnRoute = timetableForRoute.stations
+    const segmentations = divideIntoSegments(0, stationsOnRoute.length - 1, numberOfSegments)
+    const routePathsForSegmentationsPromise = segmentations.map(segmentation => findRoutePathForSegmentation(segmentation, stationsOnRoute, departureDate))
+    const routePathsForSegmentations = await promiseAllResolved(routePathsForSegmentationsPromise)
 
     return routePathsForSegmentations
 }

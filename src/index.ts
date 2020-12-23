@@ -15,7 +15,7 @@ async function main() {
     }
 
     console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
-    let allRoutePaths = await allRoutePathsForSegmentations(cityToLocationDefinition(cityFrom),cityToLocationDefinition(cityTo), new Date(), 2)
+    const allRoutePaths = await allRoutePathsForSegmentations(cityToLocationDefinition(cityFrom),cityToLocationDefinition(cityTo), new Date(), 2)
     const statementsForAllRoutePaths = allRoutePaths.map(routePath => {
         return `route: ${stationNamesOnRoutePath(routePath).join('->')} price:${lowestPriceForRoutePath(routePath)}`
     })
