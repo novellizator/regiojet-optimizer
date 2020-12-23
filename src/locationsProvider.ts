@@ -16,6 +16,9 @@ export class LocationsProvider {
     findCityFromId(cityId: number): City | undefined {
       return this.getAllCities().find(city => city.id == cityId)
     }
+    findCityFromStationId(stationId: number): City | undefined {
+      return this.getAllCities().find(city => city.stations.find(station => station.id == stationId))
+    }
 
     findStationFromId(stationId: number): Station | undefined {
       return this.getAllStations().find(station => station.id == stationId)

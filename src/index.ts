@@ -5,9 +5,8 @@ import { cityToLocationDefinition } from "./types/locations"
 
 
 async function main() {
-    const cityFromSearch = "Prag"
-    const cityToSearch = "kosice"
-
+    const [cityFromSearch, cityToSearch, segments] = process.argv.slice(2)
+    const numberOfSegments = Math.max(1, Number(segments == undefined ? 0 : segments))
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)
     if (!cityFrom || !cityTo) {
@@ -15,7 +14,7 @@ async function main() {
     }
 
     console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
-    const allRoutePaths = await allRoutePathsForSegmentations(cityToLocationDefinition(cityFrom),cityToLocationDefinition(cityTo), new Date(), 2)
+    const allRoutePaths = await allRoutePathsForSegmentations(cityToLocationDefinition(cityFrom),cityToLocationDefinition(cityTo), new Date(), numberOfSegments)
     const statementsForAllRoutePaths = allRoutePaths.map(routePath => {
         return `route: ${stationNamesOnRoutePath(routePath).join('->')} price:${lowestPriceForRoutePath(routePath)}`
     })

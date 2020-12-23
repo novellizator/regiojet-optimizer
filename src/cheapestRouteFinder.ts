@@ -1,3 +1,4 @@
+import { mockLocationsProvider } from "./locationsProvider"
 import { RoutePath } from "./routePath"
 import { divideIntoSegments, Segmentation } from "./segmentDivider"
 import { RouteSearchService } from "./services/routeSearchService"
@@ -50,7 +51,9 @@ export async function allRoutePathsForSegmentations(fromLocation: LocationDefini
 
     const timetableForRoute = await timetableService.fetchTimetableForRoute(firstViableRoute.id)
     const stationsOnRoute = timetableForRoute.stations
-    const segmentations = divideIntoSegments(0, stationsOnRoute.length - 1, numberOfSegments)
+
+    const finalStationIndex = stationsOnRoute.findIndex(stationOnRoute => toLocation.id == mockLocationsProvider.findCityFromStationId(stationOnRoute.stationId)?.id)
+    const segmentations = divideIntoSegments(0, finalStationIndex, numberOfSegments)
     const routePathsForSegmentationsPromise = segmentations.map(segmentation => findRoutePathForSegmentation(segmentation, stationsOnRoute, departureDate))
     const routePathsForSegmentations = await promiseAllResolved(routePathsForSegmentationsPromise)
 
