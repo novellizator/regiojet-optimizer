@@ -1,0 +1,140 @@
+{
+    "___source": "https://brn-ybus-pubapi.sa.cz/restapi/consts/timetables/5525907902",
+    "connectionId": 5507688016,
+    "fromCityName": "Praha",
+    "toCityName": "Košice",
+    "stations": [
+        {
+            "stationId": 372825000,
+            "departure": "14: 50: 00.000",
+            "arrival": "",
+            "platform": ""
+        },
+        {
+            "stationId": 372825002,
+            "departure": "15: 44: 00.000",
+            "arrival": "15: 43: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1313142000,
+            "departure": "16: 19: 00.000",
+            "arrival": "16: 18: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825004,
+            "departure": "16: 41: 00.000",
+            "arrival": "16: 40: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825005,
+            "departure": "17: 06: 00.000",
+            "arrival": "17: 03: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825006,
+            "departure": "17: 38: 00.000",
+            "arrival": "17: 37: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825007,
+            "departure": "18: 05: 00.000",
+            "arrival": "18: 03: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825008,
+            "departure": "18: 12: 00.000",
+            "arrival": "18: 11: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825009,
+            "departure": "18: 16: 00.000",
+            "arrival": "18: 15: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 372825010,
+            "departure": "18: 32: 00.000",
+            "arrival": "18: 30: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 508812001,
+            "departure": "18: 49: 00.000",
+            "arrival": "18: 48: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1313142001,
+            "departure": "18: 57: 00.000",
+            "arrival": "18: 56: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 508812003,
+            "departure": "19: 20: 00.000",
+            "arrival": "19: 18: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 508812004,
+            "departure": "19: 55: 00.000",
+            "arrival": "19: 42: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018000,
+            "departure": "20: 21: 00.000",
+            "arrival": "20: 18: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018001,
+            "departure": "20: 49: 00.000",
+            "arrival": "20: 48: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018002,
+            "departure": "21: 07: 00.000",
+            "arrival": "21: 06: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018003,
+            "departure": "21: 35: 00.000",
+            "arrival": "21: 34: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018004,
+            "departure": "21: 57: 00.000",
+            "arrival": "21: 54: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018005,
+            "departure": "22: 14: 00.000",
+            "arrival": "22: 13: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018006,
+            "departure": "22: 53: 00.000",
+            "arrival": "22: 52: 00.000",
+            "platform": ""
+        },
+        {
+            "stationId": 1763018007,
+            "departure": "",
+            "arrival": "23: 05: 00.000",
+            "platform": ""
+        }
+    ]
+}

@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
+      "strict": true,
       "target": "es6",
-      "module": "esnext",
+      "module": "commonjs",
       "rootDir": "src",
       "outDir": "dist",
       "sourceMap": true,
@@ -11,7 +12,8 @@
       "esModuleInterop": true
     },
     "include": [
-      "src/**/*.ts"
+      "src/**/*.ts",
+      "src/*.ts"
     ],
     "exclude": [
       "node_modules"

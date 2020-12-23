@@ -1,61 +1,32 @@
-import {RegiojetLocationsProvider, mockLocationsProvider}from './locationsProvider'
-import {RouteProvider}from './routeProvider'
-////
+import { cheapestRoute } from "./cheapest-route-finder"
 
 /// I have a route
-enum StationType {
-  fullName, regioId, idosId  
-}
-interface Station {
-    value: string | number
-    type: StationType
-}
-interface Price {
-    value: number
-    currency: string
-}
 
-interface PricedRouteSegment extends RouteSegment {
-    from: Station
-    to: Station
-    price: Price
-}
+// async function findCheapestRoute(from: Station, to: Station, time: Date): Promise<[PricedRoute]> {
+//    const divisionStrategy: RouteDivisionStrategy = NoDivisionStrategy()
+//    const divisions = divisionStrategy.getDivisions(from, to)
+//    for (const division of divisions) {
+//        let route = []
+//        for (const divisionSegment of division) {
+//          let ticketsResponse = await TicketService().fetchTickets(from, to, time)
+//          let ticketProvider = TicketProvider(ticketsResponse)
+//          let ticket = ticket.asTicket()
+//          route.push(ticket)
+//        }
+//    }
 
-type Route = [RouteSegment]
-type PricedRoute = [PricedRouteSegment]
-
-interface RouteSegment {
-    from: Station
-    to: Station
-}
-interface RouteDivisionStrategy {
-    getDivisions(from: Station, to: Station): [Route]
+// }
+interface IC {
+    flat<U>(this: U[][], depth?: 1): U[];
 }
 
-class NoDivisionStrategy implements RouteDivisionStrategy {
-   constructor(public routeProvider: RouteProvider) {
-   }
-   getDivisions(from: Station, to: Station): [Route] {
-
-   }
-
+async function main() {
+    let date = new Date()
+    date.setFullYear(2000)
+    let x = await cheapestRoute({id: 123, type: 'CITY'},{id: 456, type: 'CITY'}, date, 1)
+    console.log(x)
 }
 
+main()
 
 
-async function findCheapestRoute(from: Station, to: Station, time: Date): PricedRoute {
-   const divisionStrategy: RouteDivisionStrategy = NoDivisionStrategy()
-   const divisions = divisionStrategy.getDivisions(from, to)
-   for (const division of divisions) {
-       let route = []
-       for (const divisionSegment of division) {
-         let ticketsResponse = await TicketService().fetchTickets(from, to, time)
-         let ticketProvider = TicketProvider(ticketsResponse)
-         let ticket = ticket.asTicket()
-         route.push(ticket)
-       }
-   }
-
-} 
-
-console.log(33333)
