@@ -37,7 +37,7 @@ async function findRoutePathForSegmentation(segmentation: Segmentation,
         const toLocation: LocationDefinition = {id: stations[segment.toIndex].stationId, type: 'STATION'}
         const route = await cheapestDirectRoute(fromLocation, toLocation, startDateForSegment)
         routePath.push(route)
-        startDateForSegment = new Date(route.departureTime)
+        startDateForSegment = new Date(route.arrivalTime)
     }
     return routePath
 }
