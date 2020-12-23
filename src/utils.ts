@@ -20,3 +20,18 @@ export function promiseAllResolved<T>(promises: Promise<T>[]): Promise<T[]> {
         })
     })
 }
+
+export function stripDiacritics(text: string) {
+    const sdiak = "áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";
+    const bdiak = "aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";
+
+    return text.split('').map(char => {
+        const index = sdiak.indexOf(char)
+        if (index == -1) {
+            return char
+        } else {
+            return bdiak[index]
+        }
+
+    }).join('')
+}

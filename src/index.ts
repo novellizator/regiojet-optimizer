@@ -6,7 +6,7 @@ import { cityToLocationDefinition } from "./types/locations"
 
 async function main() {
     const cityFromSearch = "Prag"
-    const cityToSearch = "Kassa"
+    const cityToSearch = "kosice"
 
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)

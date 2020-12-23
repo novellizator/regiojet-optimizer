@@ -1,14 +1,16 @@
 import locations from './mocks/locations.json'
 import { City, Locations, Station } from './types/locations'
+import { stripDiacritics } from './utils'
 export class LocationsProvider {
     constructor(private locations: Locations) {}
     findCity(searchCity: string): City | undefined {
-      const lowercaseCity = searchCity.toLowerCase()
+      const lowercaseCity = stripDiacritics(searchCity.toLowerCase())
       return this
         .getAllCities()
         .find((cityLocation) =>
           [...cityLocation.aliases, cityLocation.name]
             .map(cityName => cityName.toLowerCase())
+            .map(cityName => stripDiacritics(cityName))
             .some(cityName => cityName.indexOf(lowercaseCity) !== -1))
     }
     findCityFromId(cityId: number): City | undefined {
