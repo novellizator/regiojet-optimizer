@@ -1,5 +1,5 @@
 import locations from './mocks/locations.json'
-import { City, Locations } from './types/locations'
+import { City, Locations, Station } from './types/locations'
 export class LocationsProvider {
     constructor(private locations: Locations) {}
     findCity(searchCity: string): City | undefined {
@@ -11,9 +11,19 @@ export class LocationsProvider {
             .map(cityName => cityName.toLowerCase())
             .some(cityName => cityName.indexOf(lowercaseCity) !== -1))
     }
+    findCityFromId(cityId: number): City | undefined {
+      return this.getAllCities().find(city => city.id == cityId)
+    }
+
+    findStationFromId(stationId: number): Station | undefined {
+      return this.getAllStations().find(station => station.id == stationId)
+    }
 
     private getAllCities(): City[] {
       return this.locations.map(country => country.cities).flat()
+    }
+    private getAllStations(): Station[] {
+      return this.getAllCities().map(city => city.stations).flat()
     }
 }
 export const mockLocationsProvider = new LocationsProvider(locations)

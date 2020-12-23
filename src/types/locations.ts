@@ -14,7 +14,8 @@ export interface City {
 
 export interface Station {
     id: number
-    name: string
+    // name: string // not that useful
+    fullname: string
 }
 
 export interface LocationDefinition {

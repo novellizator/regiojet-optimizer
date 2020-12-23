@@ -1,3 +1,4 @@
+import { RoutePath } from "./routePath"
 import { divideIntoSegments, Segmentation } from "./segmentDivider"
 import { RouteSearchService } from "./services/routeSearchService"
 import { MockTimetableService } from "./services/timetableService"
@@ -23,7 +24,6 @@ async function cheapestDirectRoute(fromLocation: LocationDefinition, toLocation:
     return firstViableRoute
 }
 
-type RoutePath = Route[]
 async function findRoutePathForSegmentation(segmentation: Segmentation,
                                             stations: TimetableStation[],
                                             startDate: Date,
@@ -41,7 +41,7 @@ async function findRoutePathForSegmentation(segmentation: Segmentation,
     return routePath
 }
 
-export async function cheapestRoute(fromLocation: LocationDefinition, toLocation: LocationDefinition, departureDate: Date, numberOfSegments: number) {
+export async function allRoutePathsForSegmentations(fromLocation: LocationDefinition, toLocation: LocationDefinition, departureDate: Date, numberOfSegments: number) {
     const canonicalRoutesSearchResult = await routeSearchService.fetchRouteForDate(departureDate, fromLocation, toLocation)
     const firstViableRoute = canonicalRoutesSearchResult[0]
     if (!firstViableRoute) {
