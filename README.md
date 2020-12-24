@@ -1,5 +1,5 @@
 # Regiojet Optimizer
-Regiojet uses some dishonest pricing tricks so sometimes it's cheaper to buy 2 tickets with virtual transfer (within the same train) than a direct one. 
+Regiojet uses some dishonest pricing tricks so sometimes it's cheaper to buy 2 tickets with virtual transfer (within the same train) than a direct one.
 Or it's better to buy a ticket for a longer distance and get off sooner.
 This app should automatize this.
 
@@ -17,7 +17,7 @@ Searches the direct line from prague to ostrava (1 segment = 0 transfers)
 ## Example output
 
 ```
-➜  ~/workspace/regio-optimizer-backend/src  git:(master) ✗ npm run search praha ostr  
+➜  ~/workspace/regio-optimizer-backend/src  git:(master) ✗ npm run search praha ostr
 
 > regio-optimizer@1.0.0 search /Users/tnovella/workspace/regio-optimizer-backend
 > ts-node ./src/index.ts "praha" "ostr"
@@ -25,27 +25,50 @@ Searches the direct line from prague to ostrava (1 segment = 0 transfers)
 Searching for cheapest route from Prague to Ostrava
 [
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Olomouc - hl.n.(2020-12-25 10:5h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Olomouc - hl.n.(2020-12-25 10:05h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 244
   },
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 259
   },
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Hranice na M. - nádr.(2020-12-25 10:36h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Hranice na M. - nádr.(2020-12-25 10:36h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 284
   },
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Pardubice - hl. nádraží(2020-12-25 8:44h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Pardubice - hl. nádraží(2020-12-25 8:44h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 328
   },
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Zábřeh na Moravě - nádr.(2020-12-25 9:41h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Zábřeh na Moravě - nádr.(2020-12-25 9:41h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 358
   },
   {
-    route: 'Prague - main train station(2020-12-25 7:50h)->Česká Třebová - nádr.(2020-12-25 9:19h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    route: [
+      'Prague - main train station(2020-12-25 7:50h)',
+      'Česká Třebová - nádr.(2020-12-25 9:19h)',
+      'Ostrava - Svinov(2020-12-25 11:02h)'
+    ],
     priceCZK: 378
   }
 ]
