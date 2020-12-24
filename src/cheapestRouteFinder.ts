@@ -40,7 +40,7 @@ async function findRoutePathForSegmentation(segmentation: Segmentation,
     return routePath
 }
 
-export async function allRoutePathsForSegmentations(fromLocation: LocationDefinition,
+export async function allRoutePathsForNumberOfSegments(fromLocation: LocationDefinition,
                                                     toLocation: LocationDefinition,
                                                     departureDate: Date,
                                                     numberOfSegments: number) {

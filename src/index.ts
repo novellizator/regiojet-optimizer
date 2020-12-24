@@ -1,24 +1,37 @@
-import { allRoutePathsForSegmentations } from "./cheapestRouteFinder"
+import { allRoutePathsForNumberOfSegments } from "./cheapestRouteFinder"
 import { mockLocationsProvider } from "./locationsProvider"
 import { lowestPriceForRoutePath, stationNamesOnRoutePath } from "./routePath"
 import { cityToLocationDefinition } from "./types/locations"
+import { promiseAllResolved } from "./utils"
 
 
 async function main() {
-    const [cityFromSearch, cityToSearch, segments] = process.argv.slice(2)
-    const numberOfSegments = Math.max(1, Number(segments == undefined ? 0 : segments))
+    const [cityFromSearch, cityToSearch] = process.argv.slice(2)
+
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)
     if (!cityFrom || !cityTo) {
         throw Error("City not found")
     }
+    const date = new Date()
 
     console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
-    const allRoutePaths = await allRoutePathsForSegmentations(cityToLocationDefinition(cityFrom),cityToLocationDefinition(cityTo), new Date(), numberOfSegments)
-    const statementsForAllRoutePaths = allRoutePaths.map(routePath => {
-        return `${stationNamesOnRoutePath(routePath).join('->')} CZK:${lowestPriceForRoutePath(routePath)}`
-    })
-    console.log(statementsForAllRoutePaths)
+
+    const allRoutePathsPromise = [1, 2].map(numberOfSegments => allRoutePathsForNumberOfSegments(
+        cityToLocationDefinition(cityFrom),
+        cityToLocationDefinition(cityTo),
+        date,
+        numberOfSegments
+    ))
+
+    const allRoutePaths = (await promiseAllResolved(allRoutePathsPromise)).flat()
+    const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
+        return {
+            route: stationNamesOnRoutePath(routePath).join('->'),
+            priceCZK: lowestPriceForRoutePath(routePath)
+        }
+    }).sort((report1, report2) => report1.priceCZK - report2.priceCZK)
+    console.log(reportsForAllRoutePaths)
 }
 
 main()
