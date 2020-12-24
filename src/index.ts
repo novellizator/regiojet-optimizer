@@ -27,7 +27,7 @@ async function main() {
     const allRoutePaths = (await promiseAllResolved(allRoutePathsPromise)).flat()
     const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
         return {
-            route: stationNamesOnRoutePath(routePath).join('->'),
+            route: stationNamesOnRoutePath(routePath),
             priceCZK: lowestPriceForRoutePath(routePath)
         }
     }).sort((report1, report2) => report1.priceCZK - report2.priceCZK)

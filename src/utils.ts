@@ -36,7 +36,7 @@ export function stripDiacritics(text: string) {
     }).join('')
 }
 
-function prefixByZeroIfNeeded(number: number) {
+export function prefixByZeroIfNeeded(number: number) {
     return `${number < 10 ? "0":'' }${number}`
 }
 
@@ -48,5 +48,5 @@ export function dateToUriString(date: Date) {
 }
 
 export function dateToTime(date: Date) {
-    return `${date.getHours()}:${date.getMinutes()}`
+    return `${date.getHours()}:${prefixByZeroIfNeeded(date.getMinutes())}`
 }
