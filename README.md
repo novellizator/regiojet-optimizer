@@ -17,17 +17,38 @@ Searches the direct line from prague to ostrava (1 segment = 0 transfers)
 ## Example output
 
 ```
-➜  ~/workspace/regio-optimizer-backend/src: npm run search praha ostr 2
+➜  ~/workspace/regio-optimizer-backend/src  git:(master) ✗ npm run search praha ostr  
 
 > regio-optimizer@1.0.0 search /Users/tnovella/workspace/regio-optimizer-backend
-> ts-node ./src/index.ts "praha" "ostr" "2"
+> ts-node ./src/index.ts "praha" "ostr"
 
 Searching for cheapest route from Prague to Ostrava
 [
-  'Prague - main train station(2020-12-24 5:20h)->Pardubice - hl. nádraží(2020-12-24 6:44h)->Ostrava - Svinov(2020-12-24 9:2h) CZK:188',
-  'Prague - main train station(2020-12-24 5:50h)->Česká Třebová - nádr.(2020-12-24 7:19h)->Ostrava - Svinov(2020-12-24 9:2h) CZK:218',
-  'Prague - main train station(2020-12-24 5:50h)->Zábřeh na Moravě - nádr.(2020-12-24 7:41h)->Ostrava - Svinov(2020-12-24 9:2h) CZK:178',
-  'Prague - main train station(2020-12-24 5:50h)->Olomouc - hl.n.(2020-12-24 8:5h)->Ostrava - Svinov(2020-12-24 9:2h) CZK:158',
-  'Prague - main train station(2020-12-24 5:50h)->Hranice na M. - nádr.(2020-12-24 8:36h)->Ostrava - Svinov(2020-12-24 9:2h) CZK:174'
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Olomouc - hl.n.(2020-12-25 10:5h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 244
+  },
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 259
+  },
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Hranice na M. - nádr.(2020-12-25 10:36h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 284
+  },
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Pardubice - hl. nádraží(2020-12-25 8:44h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 328
+  },
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Zábřeh na Moravě - nádr.(2020-12-25 9:41h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 358
+  },
+  {
+    route: 'Prague - main train station(2020-12-25 7:50h)->Česká Třebová - nádr.(2020-12-25 9:19h)->Ostrava - Svinov(2020-12-25 11:2h)',
+    priceCZK: 378
+  }
 ]
 ```
+
+As you can already see, the program found an optimization ;-)
