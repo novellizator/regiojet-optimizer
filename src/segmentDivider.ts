@@ -6,7 +6,7 @@ export function divideIntoSegments(start: number, end: number, numberOfSegments:
     return divisions
 }
 
-function divideLineIntoSegments(start: number, end: number, numberOfSegments: number, currentDivision: number[], divisions: number[][]) {
+function divideLineIntoSegments(start: number, end: number, numberOfSegments: number, currentDivision: Segmentation, divisions: Segmentation[]) {
     if (start == end) {
         if (numberOfSegments == 0) {
             divisions.push(currentDivision)

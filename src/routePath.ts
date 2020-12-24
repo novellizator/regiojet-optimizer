@@ -16,9 +16,6 @@ export function departuresOnRoutePath(routePath: RoutePath): string[] {
     return routePath.map(route => route.departureTime)
 }
 
-function shortDateTime(date: Date) {
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-}
 export function stationNamesOnRoutePath(routePath: RoutePath): String[] {
     const stationIds = stationIdsOnRoutePath(routePath)
     return stationIds.map((stationId, i) => {

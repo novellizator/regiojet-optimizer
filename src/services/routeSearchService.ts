@@ -8,10 +8,6 @@ interface RoutesFetching {
     fetchRouteForDateTime(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<Route[]>
 }
 
-interface LocationItem extends LocationDefinition {
-    direction: 'from' | 'to'
-}
-
 export class RouteSearchService implements RoutesFetching {
     private async fetchRawRoute(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition): Promise<RouteSearchResult> {
         const uri = generateUri(departureDate, fromLocation, toLocation)
@@ -43,6 +39,10 @@ export class MockRouteSearchService implements RoutesFetching {
         // does the same in mock
         return (routeSearchResult as RouteSearchResult).routes
     }
+}
+
+interface LocationItem extends LocationDefinition {
+    direction: 'from' | 'to'
 }
 
 export function generateUri(departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition) {

@@ -39,8 +39,7 @@ export function stripDiacritics(text: string) {
 function prefixByZeroIfNeeded(number: number) {
     return `${number < 10 ? "0":'' }${number}`
 }
-// 2020-12-20
-// shaves off the time
+
 export function dateToUriString(date: Date) {
     const year = date.getFullYear()
     const month = prefixByZeroIfNeeded(date.getMonth() + 1) // 0-11
