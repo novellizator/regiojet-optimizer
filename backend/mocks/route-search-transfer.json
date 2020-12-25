@@ -1,0 +1,89 @@
+    {
+        "__source": "https://brn-ybus-pubapi.sa.cz/restapi/routes/search/simple?departureDate=2020-12-25&fromLocationId=10202033&fromLocationType=CITY&tariffs=REGULAR&toLocationId=10202072&toLocationType=CITY",
+        "routes": [
+            {
+                "id": "5526910231,5478291772",
+                "departureStationId": 1763018007,
+                "departureTime": "2020-12-25T21:14:00.000+01:00",
+                "arrivalStationId": 10204076,
+                "arrivalTime": "2020-12-26T13:10:00.000+01:00",
+                "vehicleTypes": [
+                    "TRAIN",
+                    "BUS"
+                ],
+                "transfersCount": 1,
+                "freeSeatsCount": 30,
+                "priceFrom": 43.9,
+                "priceTo": 43.9,
+                "creditPriceFrom": 43.9,
+                "creditPriceTo": 43.9,
+                "pricesCount": 1,
+                "actionPrice": false,
+                "surcharge": false,
+                "notices": false,
+                "support": false,
+                "nationalTrip": false,
+                "bookable": true,
+                "delay": null,
+                "travelTime": "15:56 h",
+                "vehicleStandardKey": "YELLOW"
+            },
+            {
+                "id": "5526910249,5478291782",
+                "departureStationId": 1763018007,
+                "departureTime": "2020-12-26T21:14:00.000+01:00",
+                "arrivalStationId": 10204076,
+                "arrivalTime": "2020-12-27T13:10:00.000+01:00",
+                "vehicleTypes": [
+                    "TRAIN",
+                    "BUS"
+                ],
+                "transfersCount": 1,
+                "freeSeatsCount": 16,
+                "priceFrom": 43.9,
+                "priceTo": 43.9,
+                "creditPriceFrom": 43.9,
+                "creditPriceTo": 43.9,
+                "pricesCount": 1,
+                "actionPrice": false,
+                "surcharge": false,
+                "notices": false,
+                "support": false,
+                "nationalTrip": false,
+                "bookable": true,
+                "delay": null,
+                "travelTime": "15:56 h",
+                "vehicleStandardKey": "YELLOW"
+            },
+            {
+                "id": "5526910267,5478291792",
+                "departureStationId": 1763018007,
+                "departureTime": "2020-12-27T21:14:00.000+01:00",
+                "arrivalStationId": 10204076,
+                "arrivalTime": "2020-12-28T13:10:00.000+01:00",
+                "vehicleTypes": [
+                    "TRAIN",
+                    "BUS"
+                ],
+                "transfersCount": 1,
+                "freeSeatsCount": 33,
+                "priceFrom": 43.9,
+                "priceTo": 43.9,
+                "creditPriceFrom": 43.9,
+                "creditPriceTo": 43.9,
+                "pricesCount": 1,
+                "actionPrice": false,
+                "surcharge": false,
+                "notices": false,
+                "support": false,
+                "nationalTrip": false,
+                "bookable": true,
+                "delay": null,
+                "travelTime": "15:56 h",
+                "vehicleStandardKey": "YELLOW"
+            }
+        ],
+        "routesMessage": null,
+        "bannerBubbles": [],
+        "textBubbles": []
+    }

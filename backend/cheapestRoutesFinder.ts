@@ -1,39 +1,39 @@
-import { allRoutePathsForNumberOfSegments } from "./cheapestRouteFinder"
+import { allRoutePathsForNumberOfSegments } from "./allSegmentsEvaluator"
 import { mockLocationsProvider } from "./locationsProvider"
 import { lowestPriceForRoutePath, stationNamesOnRoutePath } from "./routePath"
 import { cityToLocationDefinition } from "./types/locations"
-import { promiseAllResolved } from "./utils"
+import { flattened } from "./utils"
 
 
-async function main() {
-    const [cityFromSearch, cityToSearch] = process.argv.slice(2)
-
+export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: string, date: Date) {
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)
     if (!cityFrom || !cityTo) {
         throw Error("City not found")
     }
-    const date = new Date()
 
     console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
 
+    const fromLocationDefinition = cityToLocationDefinition(cityFrom)
+    const toLocationDefinition = cityToLocationDefinition(cityTo)
+
     const allRoutePathsPromise = [1, 2].map(numberOfSegments => allRoutePathsForNumberOfSegments(
-        cityToLocationDefinition(cityFrom),
-        cityToLocationDefinition(cityTo),
+        fromLocationDefinition,
+        toLocationDefinition,
         date,
         numberOfSegments
     ))
 
-    const allRoutePaths = (await promiseAllResolved(allRoutePathsPromise)).flat()
+
+    const allRoutePaths = flattened((await Promise.all(allRoutePathsPromise)))
     const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
         return {
             route: stationNamesOnRoutePath(routePath),
             priceCZK: lowestPriceForRoutePath(routePath)
         }
     }).sort((report1, report2) => report1.priceCZK - report2.priceCZK)
-    console.log(reportsForAllRoutePaths)
-}
 
-main()
+    return reportsForAllRoutePaths
+}
 
 

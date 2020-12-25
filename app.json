@@ -1,0 +1,20 @@
+{
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ],
+    "description": "",
+    "env": {
+      "NODE_ENV": {
+        "required": true
+      }
+    },
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },
+    "name": "regiojet-app",
+    "stack": "container"
+  }
