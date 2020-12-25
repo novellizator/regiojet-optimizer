@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:children": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
-    "start": "./start.sh"
+    "start": "bash ./start.sh"
   },
   "repository": {
     "type": "git",
