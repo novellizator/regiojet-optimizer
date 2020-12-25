@@ -1,14 +1,17 @@
 FROM nginx
+ENTRYPOINT []
 
 RUN apt-get update >/dev/null
 RUN apt-get install -qq -y curl xz-utils >/dev/null
 RUN curl -s http://node.salsita.co/ | bash
 RUN node_installer 10.15.3
 
-RUN rm -rf /srv
+RUN rm -rf /srv && useradd -md /srv -s /bin/bash regiojetUser
+USER regiojetUser
 WORKDIR /srv
-COPY . /srv/
-# RUN cp frontend/.env.docker.example frontend/.env
-RUN npm install --production
-RUN npm run install:children
+ADD --chown=regiojetUser:regiojetUser . /srv/
 
+# RUN cp frontend/.env.docker.example frontend/.env
+RUN npm install
+RUN npm run install:children
+RUN cd frontend && npm run build && cd ..
