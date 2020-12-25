@@ -3,6 +3,7 @@ import { City, Locations, Station } from './types/locations'
 import { stripDiacritics } from './utils'
 export class LocationsProvider {
     constructor(private locations: Locations) {}
+
     findCity(searchCity: string): City | undefined {
       const lowercaseCity = stripDiacritics(searchCity.toLowerCase())
       return this
@@ -13,9 +14,11 @@ export class LocationsProvider {
             .map(cityName => stripDiacritics(cityName))
             .some(cityName => cityName.indexOf(lowercaseCity) !== -1))
     }
+
     findCityFromId(cityId: number): City | undefined {
       return this.getAllCities().find(city => city.id == cityId)
     }
+
     findCityFromStationId(stationId: number): City | undefined {
       return this.getAllCities().find(city => city.stations.find(station => station.id == stationId))
     }
@@ -27,6 +30,7 @@ export class LocationsProvider {
     private getAllCities(): City[] {
       return this.locations.map(country => country.cities).flat()
     }
+
     private getAllStations(): Station[] {
       return this.getAllCities().map(city => city.stations).flat()
     }

@@ -2,6 +2,7 @@ import express from 'express'
 import { NextFunction, Response, Request } from 'express'
 import * as bodyParser from 'body-parser'
 import { findCheapestRoutes } from './cheapestRoutesFinder'
+import { type } from 'os'
 
 const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -26,18 +27,26 @@ const processError = (response: Response, error: Error): void => {
   response.send(error.message)
 }
 
-interface Input {
+interface SearchInput {
     cityFromSearch: string
     cityToSearch: string
-    date?: Date
 }
 
-app.get('/search', async (req: Request<Input>, res: Response) => {
+function isSearchInput(test: unknown): test is SearchInput {
+  const typed = test as SearchInput
+  return typeof typed.cityFromSearch == "string" && typeof typed.cityToSearch == "string"
+}
 
-    const {cityFromSearch, cityToSearch, date} = req.params
+app.get('/search', async (req: Request, res: Response) => {
+    const input = req.query
+    if (!isSearchInput(input)) {
+      processError(res, Error('Bad input format'))
+      return
+    }
+    const {cityFromSearch, cityToSearch} = input
 
     try {
-        const result = await findCheapestRoutes(cityFromSearch, cityToSearch, date)
+        const result = await findCheapestRoutes(cityFromSearch, cityToSearch, new Date())
         res.send(result)
     } catch (error) {
         processError(res, error)

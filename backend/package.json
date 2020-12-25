@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "search": "ts-node ./cli.ts"
+    "search": "ts-node ./cli.ts",
+    "start": "ts-node app.ts"
   },
   "keywords": [],
   "author": "Tomas Novella",
