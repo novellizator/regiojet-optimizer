@@ -2,7 +2,7 @@ import { mockLocationsProvider } from "./locationsProvider"
 import { RoutePath } from "./routePath"
 import { divideIntoSegments, Segmentation } from "./segmentDivider"
 import { RouteSearchService } from "./services/routeSearchService"
-import { MockTimetableService } from "./services/timetableService"
+import { TimetableService } from "./services/timetableService"
 import { LocationDefinition } from "./types/locations"
 import { Route } from "./types/routeSearchRoutes"
 import { TimetableStation } from "./types/timetable"
@@ -10,7 +10,7 @@ import { promiseAllResolved } from "./utils"
 
 
 const routeSearchService = new RouteSearchService()
-const timetableService = new MockTimetableService()
+const timetableService = new TimetableService()
 
 async function cheapestDirectRoute(fromLocation: LocationDefinition,
                                    toLocation: LocationDefinition,
@@ -45,9 +45,11 @@ export async function allRoutePathsForNumberOfSegments(fromLocation: LocationDef
                                                     departureDate: Date,
                                                     numberOfSegments: number) {
     const canonicalRoutesSearchResult = await routeSearchService.fetchRouteForDate(departureDate, fromLocation, toLocation)
-    const firstViableRoute = canonicalRoutesSearchResult[0]
+
+    const firstViableRoute = canonicalRoutesSearchResult.find(route => !route.id.includes(','))
     if (!firstViableRoute) {
-        throw Error("No canonical route found")
+        console.warn("ajajaj")
+        throw Error("No canonical route found. Maybe the route has a transfer. As of now, we cannot process that")
     }
 
     const timetableForRoute = await timetableService.fetchTimetableForRoute(firstViableRoute.id)

@@ -5,7 +5,7 @@ import { cityToLocationDefinition } from "./types/locations"
 import { promiseAllResolved } from "./utils"
 
 
-export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: string, date: Date = new Date()) {
+export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: string, date: Date) {
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)
     if (!cityFrom || !cityTo) {
@@ -14,14 +14,18 @@ export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: s
 
     console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
 
+    const fromLocationDefinition = cityToLocationDefinition(cityFrom)
+    const toLocationDefinition = cityToLocationDefinition(cityTo)
+
     const allRoutePathsPromise = [1, 2].map(numberOfSegments => allRoutePathsForNumberOfSegments(
-        cityToLocationDefinition(cityFrom),
-        cityToLocationDefinition(cityTo),
+        fromLocationDefinition,
+        toLocationDefinition,
         date,
         numberOfSegments
     ))
 
-    const allRoutePaths = (await promiseAllResolved(allRoutePathsPromise)).flat()
+
+    const allRoutePaths = (await Promise.all(allRoutePathsPromise)).flat()
     const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
         return {
             route: stationNamesOnRoutePath(routePath),
