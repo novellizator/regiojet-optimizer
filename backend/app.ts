@@ -40,6 +40,7 @@ function isSearchInput(test: unknown): test is SearchInput {
 
 app.get('/search', async (req: Request, res: Response) => {
     const input = req.query
+    console.log('input', input, 'params', req.params, 'body', req.body)
     if (!isSearchInput(input)) {
       processError(res, Error('Bad input format'))
       return
