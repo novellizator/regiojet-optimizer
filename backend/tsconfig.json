@@ -3,7 +3,7 @@
       "strict": true,
       "target": "es6",
       "module": "commonjs",
-      "rootDir": "src",
+      "rootDir": ".",
       "outDir": "dist",
       "sourceMap": true,
       "resolveJsonModule": true,
@@ -12,8 +12,8 @@
       "esModuleInterop": true
     },
     "include": [
-      "src/**/*.ts",
-      "src/*.ts"   ],
+      "**/*.ts",
+      "*.ts"   ],
     "exclude": [
       "node_modules"
     ]
