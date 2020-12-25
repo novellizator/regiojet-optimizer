@@ -24,6 +24,7 @@ app.use(jsonParser)
 
 const processError = (response: Response, error: Error): void => {
   console.error(error)
+  response.status(500)
   response.send(error.message)
 }
 
