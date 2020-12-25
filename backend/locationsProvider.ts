@@ -2,7 +2,9 @@ import locations from './mocks/locations.json'
 import { City, Locations, Station } from './types/locations'
 import { stripDiacritics } from './utils'
 export class LocationsProvider {
-    constructor(private locations: Locations) {}
+    constructor(private locations: Locations) {
+      console.log('locations', this.locations.length, this.locations)
+    }
 
     findCity(searchCity: string): City | undefined {
       const lowercaseCity = stripDiacritics(searchCity.toLowerCase())
