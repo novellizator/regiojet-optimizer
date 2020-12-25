@@ -1,11 +1,6 @@
 import express from 'express'
 import { NextFunction, Response, Request } from 'express'
-import * as bodyParser from 'body-parser'
 import { findCheapestRoutes } from './cheapestRoutesFinder'
-import { type } from 'os'
-
-const jsonParser = bodyParser.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const app = express()
 const port = 3000
@@ -18,9 +13,6 @@ const addCrossDomainHeaders = function(req: Request, res: Response, next: NextFu
 }
 
 app.use(addCrossDomainHeaders)
-app.use(urlencodedParser)
-app.use(jsonParser)
-
 
 const processError = (response: Response, error: Error): void => {
   console.error(error)
