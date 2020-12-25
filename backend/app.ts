@@ -48,7 +48,7 @@ app.get('/search', async (req: Request, res: Response) => {
 
     try {
         const result = await findCheapestRoutes(cityFromSearch, cityToSearch, new Date())
-        res.send(result)
+        res.send({result})
     } catch (error) {
         processError(res, error)
     }
