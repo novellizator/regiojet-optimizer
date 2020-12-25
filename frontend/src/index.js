@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+fetch("http://localhost:3000/api/search?cityFromSearch=kosic&cityToSearch=ostr")
+.then(r => r.json())
+.then(r => console.warn(r))
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
