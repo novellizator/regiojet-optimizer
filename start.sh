@@ -3,6 +3,9 @@
 PROXY_PORT=$PORT
 unset PORT
 
+echo $PROXY_PORT
+wc nginx/nginx-heroku.conf
+
 cd backend
 npm start &
 cd ..
