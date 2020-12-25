@@ -1,0 +1,24 @@
+{
+  "name": "regio-optimizer",
+  "version": "1.0.0",
+  "description": "FE and BE",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:children": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
+    "start": "./start.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novellizator/regiojet-optimizer.git"
+  },
+  "author": "Tomas Novella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novellizator/regiojet-optimizer/issues"
+  },
+  "homepage": "https://github.com/novellizator/regiojet-optimizer#readme",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
