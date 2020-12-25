@@ -50,3 +50,6 @@ export function dateToUriString(date: Date) {
 export function dateToTime(date: Date) {
     return `${date.getHours()}:${prefixByZeroIfNeeded(date.getMinutes())}`
 }
+
+// arr.flat() is not supported in older node
+export const flattened = (arr: any[]) => [].concat(...arr)

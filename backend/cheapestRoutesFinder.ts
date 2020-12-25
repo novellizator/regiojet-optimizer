@@ -2,7 +2,7 @@ import { allRoutePathsForNumberOfSegments } from "./allSegmentsEvaluator"
 import { mockLocationsProvider } from "./locationsProvider"
 import { lowestPriceForRoutePath, stationNamesOnRoutePath } from "./routePath"
 import { cityToLocationDefinition } from "./types/locations"
-import { promiseAllResolved } from "./utils"
+import { flattened } from "./utils"
 
 
 export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: string, date: Date) {
@@ -25,7 +25,7 @@ export async function findCheapestRoutes(cityFromSearch: string, cityToSearch: s
     ))
 
 
-    const allRoutePaths = (await Promise.all(allRoutePathsPromise)).flat()
+    const allRoutePaths = flattened((await Promise.all(allRoutePathsPromise)))
     const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
         return {
             route: stationNamesOnRoutePath(routePath),

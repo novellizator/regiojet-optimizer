@@ -1,9 +1,8 @@
 import locations from './mocks/locations.json'
 import { City, Locations, Station } from './types/locations'
-import { stripDiacritics } from './utils'
+import { flattened, stripDiacritics } from './utils'
 export class LocationsProvider {
     constructor(private locations: Locations) {
-      console.log('locations', this.locations.length, this.locations)
     }
 
     findCity(searchCity: string): City | undefined {
@@ -30,11 +29,11 @@ export class LocationsProvider {
     }
 
     private getAllCities(): City[] {
-      return this.locations.map(country => country.cities).flat()
+      return flattened(this.locations.map(country => country.cities))
     }
 
     private getAllStations(): Station[] {
-      return this.getAllCities().map(city => city.stations).flat()
+      return flattened(this.getAllCities().map(city => city.stations))
     }
 }
 export const mockLocationsProvider = new LocationsProvider(locations)
