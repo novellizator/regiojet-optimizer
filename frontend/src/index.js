@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-fetch("http://localhost:3000/api/search?cityFromSearch=kosic&cityToSearch=ostr")
+fetch(`${window.location.protocol}//${window.location.hostname}/api/search?cityFromSearch=kosic&cityToSearch=ostr`)
 .then(r => r.json())
 .then(r => console.warn(r))
 
