@@ -48,7 +48,6 @@ export async function allRoutePathsForNumberOfSegments(fromLocation: LocationDef
 
     const firstViableRoute = canonicalRoutesSearchResult.find(route => !route.id.includes(','))
     if (!firstViableRoute) {
-        console.warn("ajajaj")
         throw Error("No canonical route found. Maybe the route has a transfer. As of now, we cannot process that")
     }
 
