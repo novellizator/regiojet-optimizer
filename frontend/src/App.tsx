@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { isSearchOutputResponse, SearchOutputResponse } from '../../backend/types/api'
 import { SearchResult, mockSearchOutputResponse } from './SearchResult'
 import { FormInputElements, Form } from './Form'
-
 interface LoadRoutes {
   kind: 'loadRoutes'
   payload: FormInputElements
@@ -24,7 +23,7 @@ function App() {
     }
     const { payload: {cityFromValue, cityToValue, dateValue}} = action
     const date = new Date(dateValue).getTime()
-    fetch(`http://localhost:3000/api/search?cityFromSearch=${cityFromValue}&cityToSearch=${cityToValue}&date=${date}`)
+    fetch(`${window.location.protocol}//${window.location.hostname}/api/search?cityFromSearch=${cityFromValue}&cityToSearch=${cityToValue}&date=${date}`)
       .then(async response => {
         const resp = await response.json()
         if (response.status != 200) {
