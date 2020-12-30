@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:children": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
+    "start:local": "concurrently \"cd backend && npm start\" \"wait-on http://localhost:3000/ping && cd frontend && PORT=3001 npm start\"",
     "start": "bash ./start.sh"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/novellizator/regiojet-optimizer#readme",
   "dependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "wait-on": "^4.0.2"
   }
 }

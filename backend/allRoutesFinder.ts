@@ -12,7 +12,7 @@ export async function findAllVirtualRoutes(cityFromSearch: string, cityToSearch:
         throw Error("City not found")
     }
 
-    console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name}`)
+    console.log(`Searching for cheapest route from ${cityFrom.name} to ${cityTo.name} at ${date.toISOString()}`)
 
     const fromLocationDefinition = cityToLocationDefinition(cityFrom)
     const toLocationDefinition = cityToLocationDefinition(cityTo)

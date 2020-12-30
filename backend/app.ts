@@ -16,27 +16,33 @@ const addCrossDomainHeaders = function(req: Request, res: Response, next: NextFu
 app.use(addCrossDomainHeaders)
 
 const processError = (response: Response, error: Error): void => {
-  console.error(error)
+  const jsonError = {error: error.message}
+  console.error('jsonerror', jsonError)
   response.status(500)
-  response.send(error.message)
+  response.send(jsonError)
 }
 
 app.get('/search', async (req: Request, res: Response) => {
     const input = req.query
 
     if (!isSearchInput(input)) {
-      processError(res, Error(`Bad input format. Received: ${input}`))
+      processError(res, new Error(`Bad input format. Expecting: cityFromSearch, cityToSearch and optional date. Received: ${JSON.stringify(input)}`))
       return
     }
     const {cityFromSearch, cityToSearch, date} = input
 
+    const validatedDate = date == undefined ? new Date() : new Date(Number.parseInt(date))
     try {
-      const result = await findAllVirtualRoutes(cityFromSearch, cityToSearch, new Date(date))
+      const result = await findAllVirtualRoutes(cityFromSearch, cityToSearch, validatedDate)
       const output = { result } as SearchOutputResponse
       res.send(output)
     } catch (error) {
       processError(res, error)
     }
+})
+
+app.get('/ping', async (req: Request, res: Response) => {
+  res.send('{"pong": 1 }')
 })
 
 app.listen(port, () => console.log(`Regiojet backend running on ${port}!`))
