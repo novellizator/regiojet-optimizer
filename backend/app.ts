@@ -1,6 +1,7 @@
 import express from 'express'
 import { NextFunction, Response, Request } from 'express'
-import { findCheapestRoutes } from './cheapestRoutesFinder'
+import { findAllVirtualRoutes } from './allRoutesFinder'
+import { isSearchInput, SearchOutputResponse } from './types/api'
 
 const app = express()
 const port = 3000
@@ -20,16 +21,6 @@ const processError = (response: Response, error: Error): void => {
   response.send(error.message)
 }
 
-interface SearchInput {
-    cityFromSearch: string
-    cityToSearch: string
-}
-
-function isSearchInput(test: unknown): test is SearchInput {
-  const typed = test as SearchInput
-  return typeof typed.cityFromSearch == "string" && typeof typed.cityToSearch == "string"
-}
-
 app.get('/search', async (req: Request, res: Response) => {
     const input = req.query
 
@@ -37,13 +28,14 @@ app.get('/search', async (req: Request, res: Response) => {
       processError(res, Error(`Bad input format. Received: ${input}`))
       return
     }
-    const {cityFromSearch, cityToSearch} = input
+    const {cityFromSearch, cityToSearch, date} = input
 
     try {
-        const result = await findCheapestRoutes(cityFromSearch, cityToSearch, new Date())
-        res.send({result})
+      const result = await findAllVirtualRoutes(cityFromSearch, cityToSearch, new Date(date))
+      const output = { result } as SearchOutputResponse
+      res.send(output)
     } catch (error) {
-        processError(res, error)
+      processError(res, error)
     }
 })
 

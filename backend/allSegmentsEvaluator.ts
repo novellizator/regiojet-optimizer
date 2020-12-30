@@ -12,7 +12,7 @@ import { promiseAllResolved } from "./utils"
 const routeSearchService = new RouteSearchService()
 const timetableService = new TimetableService()
 
-async function cheapestDirectRoute(fromLocation: LocationDefinition,
+async function earliestDirectRoute(fromLocation: LocationDefinition,
                                    toLocation: LocationDefinition,
                                    departureDate: Date): Promise<Route> {
     const routeSearchResult = await routeSearchService.fetchRouteForDateTime(departureDate, fromLocation, toLocation)
@@ -26,7 +26,7 @@ async function cheapestDirectRoute(fromLocation: LocationDefinition,
 async function findRoutePathForSegmentation(segmentation: Segmentation,
                                             stations: TimetableStation[],
                                             startDate: Date,
-                                            resolveRouteForConditions: ((from: LocationDefinition, to: LocationDefinition, departure: Date) => Promise<Route>) = cheapestDirectRoute): Promise<RoutePath> {
+                                            resolveRouteForConditions: ((from: LocationDefinition, to: LocationDefinition, departure: Date) => Promise<Route>) = earliestDirectRoute): Promise<RoutePath> {
     const routePath: RoutePath = []
     let startDateForSegment = startDate
     for (let i = 0; i < segmentation.length - 1; ++i) {
