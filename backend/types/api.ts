@@ -6,7 +6,7 @@ export interface SearchInput {
 
 export function isSearchInput(test: unknown): test is SearchInput {
   const typed = test as SearchInput
-  return typeof typed.cityFromSearch == "string" && typeof typed.cityToSearch == "string" && typeof typed.date in ["string", "number", "undefined"]
+  return typeof typed.cityFromSearch == 'string' && typeof typed.cityToSearch == 'string' && typeof typed.date in ['string', 'number', 'undefined']
 }
 
 export interface SearchOutput {

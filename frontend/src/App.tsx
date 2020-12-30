@@ -1,7 +1,9 @@
 import DateTimePicker from 'react-datetime-picker'
 import React, { useState, useEffect } from 'react';
 
-import { RouteSearchResult } from '../../backend/types/routeSearchRoutes'
+import { isSearchOutputResponse, SearchOutputResponse } from '../../backend/types/api'
+import { SearchResult, mockSearchOutputResponse } from './SearchResult'
+
 
 interface FormElements {
   dateValue: Date
@@ -9,24 +11,12 @@ interface FormElements {
   cityToValue: string
 }
 
-interface Response {
-
-}
-
-function submitValues(elements: FormElements) {
-  //const {dateValue, cityFromValue, cityToValue} = elements
-  // fetch(`${window.location.protocol}//${window.location.hostname}/api/search?cityFromSearch=kosic&cityToSearch=ostr`)
-  // .then(r => r.json())
-  // .then(r => console.warn(r))
-  console.log(elements)
-}
-
 function App() {
-  const [response, setResponse] = useState<Response | undefined>(undefined)
+  const [response, setResponse] = useState<SearchOutputResponse | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     if (isLoading) {
-      Promise.resolve({foo:'bar'}).then(setResponse)
+      Promise.resolve(mockSearchOutputResponse).then(setResponse)
       // fetch('http://localhost')
       //   .then(r => r.json())
       //   .then(r => {
@@ -34,35 +24,30 @@ function App() {
       //   })
     }
   }, [isLoading])
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Regiojet Optimizer</h1>
         <Form onSubmit={() => setIsLoading(true)}/>
-        <SearchResult response={response}/>
+        {response && <SearchResult result={response.result}/> }
       </header>
     </div>
   );
 }
 
 
-interface SearchResultProps {
-  response: Response | undefined
-}
-function SearchResult({ response }: SearchResultProps) {
-  return <pre>{JSON.stringify(response)}</pre>
-}
-
 interface FormProps {
   onSubmit: (a: FormElements)=> void
 }
+
 function Form({ onSubmit }: FormProps) {
   const [dateValue, onDateChange] = useState(new Date());
   const [cityFromValue, setCityFromValue] = useState("prag")
   const [cityToValue, setCityToValue] = useState("ostra")
 
   return (
-    <form onSubmit={e => {e.preventDefault(); onSubmit({dateValue, cityFromValue, cityToValue})}}>
+    <form onSubmit={e => { e.preventDefault(); onSubmit({dateValue, cityFromValue, cityToValue}) }}>
       <table>
       <tbody>
         <tr>
