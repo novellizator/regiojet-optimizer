@@ -13,7 +13,8 @@ interface Noop {
 const noopAction = () => ({kind: 'noop'} as Noop)
 
 type Action = Noop | LoadRoutes
-function App() {
+
+function useAction() {
   const [response, setResponse] = useState<SearchOutputResponse | undefined>(undefined)
   const [error, setError] = useState<String | undefined>(undefined)
   const [action, setAction] = useState<Action>(noopAction())
@@ -36,6 +37,12 @@ function App() {
       })
 
   }, [action])
+
+  return {error, response, setAction}
+}
+
+function App() {
+  const {error, response, setAction} = useAction()
 
   return (
     <div className="App">
