@@ -53,3 +53,15 @@ export function dateToTime(date: Date) {
 
 // arr.flat() is not supported in older node
 export const flattened = (arr: any[]) => [].concat(...arr)
+
+
+export function parseDate(dateCandidate: string | undefined): Date {
+    if (dateCandidate == undefined || dateCandidate == "" ) {
+        return new Date()
+    }
+    const isNumberInString = String(Number.parseInt(dateCandidate)) == dateCandidate
+    if (isNumberInString) {
+        return new Date(Number.parseInt(dateCandidate))
+    }
+    return new Date(dateCandidate)
+}

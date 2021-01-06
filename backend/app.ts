@@ -2,6 +2,7 @@ import express from 'express'
 import { NextFunction, Response, Request } from 'express'
 import { findAllVirtualRoutes } from './allRoutesFinder'
 import { isSearchInput, SearchOutputResponse } from './types/api'
+import { parseDate } from './utils'
 
 const app = express()
 const port = 3000
@@ -30,8 +31,7 @@ app.get('/search', async (req: Request, res: Response) => {
       return
     }
     const {cityFromSearch, cityToSearch, date} = input
-
-    const validatedDate = date == undefined ? new Date() : new Date(Number.parseInt(date))
+    const validatedDate = parseDate(date)
     try {
       const result = await findAllVirtualRoutes(cityFromSearch, cityToSearch, validatedDate)
       const output = { result } as SearchOutputResponse
