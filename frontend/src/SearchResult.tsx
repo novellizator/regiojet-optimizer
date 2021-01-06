@@ -19,10 +19,19 @@ return (<>
 
 }
 
-function routeNodeDescription(desc: RouteNodeDescription[]): string {
-     return desc.map(descItem => {
-        return `${descItem.station} (${new Date(descItem.date).toLocaleDateString()} ${new Date(descItem.date).toLocaleTimeString()})`
-     }).join('->')
+function routeNodeDescription(desc: RouteNodeDescription[]) {
+     return desc.map((descItem, i) => {
+        return <>
+        {descItem.station}
+        <small>
+           {` `}(
+            {new Date(descItem.date).toLocaleDateString()}{` `}
+            {new Date(descItem.date).toLocaleTimeString()}
+            )
+        </small>
+        {(i != desc.length -1) && "->"}
+        </>
+    })
 }
 
 export const mockSearchOutputResponse: SearchOutputResponse = {

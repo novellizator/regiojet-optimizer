@@ -26,7 +26,7 @@ export class RouteSearchService implements RoutesFetching {
 
     fetchRouteForDateTime = async (departureDate: Date, fromLocation: LocationDefinition, toLocation: LocationDefinition) => {
         const routes = await this.fetchRouteForDate(departureDate, fromLocation, toLocation)
-        return routes.filter(routeDepartureLaterThan(departureDate))
+        return routes.filter(routeDepartureLaterThanEqual(departureDate))
     }
 }
 
@@ -60,6 +60,6 @@ function locationItemToUriString(locationItem: LocationItem) {
     return `${locationItem.direction}LocationId=${locationItem.id}&${locationItem.direction}LocationType=${locationItem.type}`
 }
 
-function routeDepartureLaterThan(date: Date) {
-    return (route: Route) => new Date(route.departureTime) > date
+function routeDepartureLaterThanEqual(date: Date) {
+    return (route: Route) => new Date(route.departureTime) >= date
 }
