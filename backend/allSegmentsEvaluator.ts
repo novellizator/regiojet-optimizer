@@ -44,7 +44,7 @@ export async function allRoutePathsForNumberOfSegments(fromLocation: LocationDef
                                                     toLocation: LocationDefinition,
                                                     departureDate: Date,
                                                     numberOfSegments: number) {
-    const canonicalRoutesSearchResult = await routeSearchService.fetchRouteForDate(departureDate, fromLocation, toLocation)
+    const canonicalRoutesSearchResult = await routeSearchService.fetchRouteForDateTime(departureDate, fromLocation, toLocation)
 
     const firstViableRoute = canonicalRoutesSearchResult.find(route => !route.id.includes(','))
     if (!firstViableRoute) {
