@@ -1,11 +1,12 @@
 import { allRoutePathsForNumberOfSegments } from "./allSegmentsEvaluator"
 import { mockLocationsProvider } from "./locationsProvider"
-import { lowestPriceForRoutePath, stationNamesOnRoutePath } from "./routePath"
+import { lowestPriceForRoutePath, routeDescriptionForRoutePath } from "./routePath"
+import { SearchOutput } from "./types/api"
 import { cityToLocationDefinition } from "./types/locations"
 import { flattened } from "./utils"
 
 
-export async function findAllVirtualRoutes(cityFromSearch: string, cityToSearch: string, date: Date) {
+export async function findAllVirtualRoutes(cityFromSearch: string, cityToSearch: string, date: Date): Promise<SearchOutput> {
     const cityFrom = mockLocationsProvider.findCity(cityFromSearch)
     const cityTo = mockLocationsProvider.findCity(cityToSearch)
     if (!cityFrom || !cityTo) {
@@ -29,7 +30,7 @@ export async function findAllVirtualRoutes(cityFromSearch: string, cityToSearch:
     const reportsForAllRoutePaths = allRoutePaths.map(routePath => {
         return {
             currency: "CZK",
-            route: stationNamesOnRoutePath(routePath),
+            route: routeDescriptionForRoutePath(routePath),
             price: lowestPriceForRoutePath(routePath)
         }
     }).sort((report1, report2) => report1.price - report2.price)
@@ -37,6 +38,6 @@ export async function findAllVirtualRoutes(cityFromSearch: string, cityToSearch:
     return {
         cityFrom: cityFrom.name,
         cityTo: cityTo.name,
-        routes: reportsForAllRoutePaths
+        routeItems: reportsForAllRoutePaths
     }
 }

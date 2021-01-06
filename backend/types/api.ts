@@ -1,3 +1,5 @@
+import { RouteNodeDescription } from "../routePath"
+
 export interface SearchInput {
   cityFromSearch: string
   cityToSearch: string
@@ -12,9 +14,9 @@ export function isSearchInput(test: unknown): test is SearchInput {
 export interface SearchOutput {
   cityFrom: string
   cityTo: string
-  routes: {
+  routeItems: {
       currency: string
-      route: String[]
+      route: RouteNodeDescription[]
       price: number
   }[]
 }
@@ -26,5 +28,5 @@ export function isSearchOutputResponse(test: unknown): test is SearchOutputRespo
   const typed = test as SearchOutputResponse
   const {result} = typed
 
-  return !!result && !!result.cityFrom && !!result.cityTo && Array.isArray(result.routes)
+  return !!result && !!result.cityFrom && !!result.cityTo && Array.isArray(result.routeItems)
 }

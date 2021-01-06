@@ -1,3 +1,4 @@
+import { RouteNodeDescription } from "../../backend/routePath"
 import { SearchOutputResponse } from "../../backend/types/api"
 
 export function SearchResult({ result }: SearchOutputResponse) {
@@ -8,56 +9,77 @@ return (<>
       <tr><th>Route</th><th>Price</th><th>Currency</th></tr>
   </thead>
   <tbody>
-    {result.routes.map((route, i) => {
-      return <tr key={i}><td>{route.route.join('->')}</td><td>{route.price}</td><td>{route.currency}</td></tr>
+    {result.routeItems.map((routeItem, i) => {
+      return <tr key={i}><td>{routeNodeDescription(routeItem.route)}</td><td>{routeItem.price}</td><td>{routeItem.currency}</td></tr>
     })}
   </tbody>
   </table>
-  <pre>{JSON.stringify(result.routes, null, 4)}</pre>
+  <pre>{JSON.stringify(result.routeItems, null, 4)}</pre>
 </>)
 
 }
 
+function routeNodeDescription(desc: RouteNodeDescription[]): string {
+     return desc.map(descItem => {
+        return `${descItem.station} (${new Date(descItem.date).toLocaleDateString()} ${new Date(descItem.date).toLocaleTimeString()})`
+     }).join('->')
+}
+
 export const mockSearchOutputResponse: SearchOutputResponse = {
   result: {
-      cityFrom: 'Prague',
-      cityTo: 'Ostrava',
-      routes: [
-          {
-              currency: 'CZK',
-              route: [
-                  'Prague - main train station(2020-12-30 13:50h)',
-                  'Olomouc - hl.n.(2020-12-30 16:05h)',
-                  'Ostrava - Svinov(2020-12-30 17:02h)'
-              ],
-              price: 268
-          },
-          {
-              currency: 'CZK',
-              route: [
-                  'Prague - main train station(2020-12-30 13:50h)',
-                  'Ostrava - Svinov(2020-12-30 17:02h)'
-              ],
-              price: 295
-          },
-          {
-              currency: 'CZK',
-              route: [
-                  'Prague - main train station(2020-12-30 13:50h)',
-                  'Hranice na M. - nádr.(2020-12-30 16:36h)',
-                  'Ostrava - Svinov(2020-12-30 17:02h)'
-              ],
-              price: 334
-          },
-          {
-              currency: 'CZK',
-              route: [
-                  'Prague - main train station(2020-12-30 13:50h)',
-                  'Pardubice - hl. nádraží(2020-12-30 14:44h)',
-                  'Ostrava - Svinov(2020-12-30 17:02h)'
-              ],
-              price: 388
-          }
-      ]
+    "cityFrom": "Prague",
+    "cityTo": "Ostrava",
+    "routeItems": [
+        {
+            "currency": "CZK",
+            "route": [
+                {
+                    "station": "Prague - main train station",
+                    "date": "2021-01-07T05:50:00.000+01:00"
+                },
+                {
+                    "station": "Ostrava - Svinov",
+                    "date": "2021-01-07T09:02:00.000+01:00"
+                }
+            ],
+            "price": 199
+        },
+        {
+            "currency": "CZK",
+            "route": [
+                {
+                    "station": "Prague - main train station",
+                    "date": "2021-01-07T05:50:00.000+01:00"
+                },
+                {
+                    "station": "Hranice na M. - nádr.",
+                    "date": "2021-01-07T08:36:00.000+01:00"
+                },
+                {
+                    "station": "Ostrava - Svinov",
+                    "date": "2021-01-07T09:02:00.000+01:00"
+                }
+            ],
+            "price": 204
+        },
+        {
+            "currency": "CZK",
+            "route": [
+                {
+                    "station": "Prague - main train station",
+                    "date": "2021-01-07T05:50:00.000+01:00"
+                },
+                {
+                    "station": "Olomouc - hl.n.",
+                    "date": "2021-01-07T08:05:00.000+01:00"
+                },
+                {
+                    "station": "Ostrava - Svinov",
+                    "date": "2021-01-07T09:02:00.000+01:00"
+                }
+            ],
+            "price": 208
+        }
+    ]
   }
 }

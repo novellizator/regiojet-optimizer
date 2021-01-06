@@ -16,7 +16,12 @@ export function departuresOnRoutePath(routePath: RoutePath): string[] {
     return routePath.map(route => route.departureTime)
 }
 
-export function stationNamesOnRoutePath(routePath: RoutePath): String[] {
+export interface RouteNodeDescription {
+    station: string
+    date: string
+}
+
+export function routeDescriptionForRoutePath(routePath: RoutePath): RouteNodeDescription[] {
     const stationIds = stationIdsOnRoutePath(routePath)
     return stationIds.map((stationId, i) => {
         const station = mockLocationsProvider.findStationFromId(stationId)
@@ -28,8 +33,10 @@ export function stationNamesOnRoutePath(routePath: RoutePath): String[] {
         }
 
         const time = i == stationIds.length - 1 ? routePath[i-1]?.arrivalTime : routePath[i].departureTime
-        const timeAsDate = new Date(time)
 
-        return `${stationName}(${dateToUriString(timeAsDate)} ${dateToTime(timeAsDate)}h)`
+        return {
+            station: stationName,
+            date: time
+        }
     })
 }
