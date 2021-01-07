@@ -6,14 +6,18 @@ export class LocationsProvider {
     }
 
     findCity(searchCity: string): City | undefined {
-      const lowercaseCity = stripDiacritics(searchCity.toLowerCase())
+      const lowercaseSearchCity = stripDiacritics(searchCity.toLowerCase())
+      // empty string is a substring of everything
+      if (lowercaseSearchCity == "") {
+        return undefined
+      }
+
       return this
         .getAllCities()
-        .find((cityLocation) =>
-          [...cityLocation.aliases, cityLocation.name]
-            .map(cityName => cityName.toLowerCase())
-            .map(cityName => stripDiacritics(cityName))
-            .some(cityName => cityName.indexOf(lowercaseCity) !== -1))
+        .find((city) =>
+          [...city.aliases, city.name]
+            .map(cityName => stripDiacritics(cityName.toLowerCase()))
+            .some(cityName => cityName.includes(lowercaseSearchCity)))
     }
 
     findCityFromId(cityId: number): City | undefined {
