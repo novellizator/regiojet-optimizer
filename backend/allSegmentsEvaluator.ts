@@ -46,6 +46,7 @@ export async function allRoutePathsForNumberOfSegments(fromLocation: LocationDef
                                                     numberOfSegments: number) {
     const canonicalRoutesSearchResult = await routeSearchService.fetchRouteForDateTime(departureDate, fromLocation, toLocation)
 
+    // routes with transfers contain a comma in `id` (see mocks)
     const firstViableRoute = canonicalRoutesSearchResult.find(route => !route.id.includes(','))
     if (!firstViableRoute) {
         throw Error("No canonical route found. Maybe the route has a transfer. As of now, we cannot process that")

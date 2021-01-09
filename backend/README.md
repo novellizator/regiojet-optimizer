@@ -1,76 +1,107 @@
-# Regiojet Optimizer
-Regiojet uses some dishonest pricing tricks so sometimes it's cheaper to buy 2 tickets with virtual transfer (within the same train) than a direct one.
-Or it's better to buy a ticket for a longer distance and get off sooner.
-This app should automatize this.
 
-## Usage
-Run `npm install` first.
+## Usage of the command line tool
+`npm run search praha ostr`
 
-`npm run search praha ostr 2`
+Searches all routes from ostrava to praha departing right away. Notice the full text search of the name of the city.
 
-Searches all routes with 2 segments (1 transfer) from ostrava to praha. Notice the fulll text search in the name of the city.
+`npm run search prague ostr 1610224846431`
 
-`npm run search praha ostr 1`
+Searches all routes from prague to ostrava leaving at january the 9th 2021 (we're using unix timestamp).
 
-Searches the direct line from prague to ostrava (1 segment = 0 transfers)
-
-## Example output
+### Example output
 
 ```
-➜  ~/workspace/regio-optimizer-backend/src  git:(master) ✗ npm run search praha ostr
-
-> regio-optimizer@1.0.0 search /Users/tnovella/workspace/regio-optimizer-backend
+➜  ~/regio-optimizer/ ✗ npm run search praha ostr
 > ts-node ./src/index.ts "praha" "ostr"
 
 Searching for cheapest route from Prague to Ostrava
 [
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Olomouc - hl.n.(2020-12-25 10:05h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 244
-  },
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 259
-  },
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Hranice na M. - nádr.(2020-12-25 10:36h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 284
-  },
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Pardubice - hl. nádraží(2020-12-25 8:44h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 328
-  },
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Zábřeh na Moravě - nádr.(2020-12-25 9:41h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 358
-  },
-  {
-    route: [
-      'Prague - main train station(2020-12-25 7:50h)',
-      'Česká Třebová - nádr.(2020-12-25 9:19h)',
-      'Ostrava - Svinov(2020-12-25 11:02h)'
-    ],
-    priceCZK: 378
-  }
+    {
+        "currency": "CZK",
+        "route": [
+            {
+                "station": "Prague - main train station",
+                "date": "2021-01-09T21:50:00.000+01:00"
+            },
+            {
+                "station": "Olomouc - hl.n.",
+                "date": "2021-01-10T00:07:00.000+01:00"
+            },
+            {
+                "station": "Ostrava - Svinov",
+                "date": "2021-01-10T01:07:00.000+01:00"
+            }
+        ],
+        "price": 208
+    },
+    {
+        "currency": "CZK",
+        "route": [
+            {
+                "station": "Prague - main train station",
+                "date": "2021-01-09T21:50:00.000+01:00"
+            },
+            {
+                "station": "Ostrava - Svinov",
+                "date": "2021-01-10T01:07:00.000+01:00"
+            }
+        ],
+        "price": 229
+    },
+    {
+        "currency": "CZK",
+        "route": [
+            {
+                "station": "Prague - main train station",
+                "date": "2021-01-09T21:50:00.000+01:00"
+            },
+            {
+                "station": "Hranice na M. - nádr.",
+                "date": "2021-01-10T00:40:00.000+01:00"
+            },
+            {
+                "station": "Ostrava - Svinov",
+                "date": "2021-01-10T01:07:00.000+01:00"
+            }
+        ],
+        "price": 234
+    },
+    {
+        "currency": "CZK",
+        "route": [
+            {
+                "station": "Prague - main train station",
+                "date": "2021-01-09T21:50:00.000+01:00"
+            },
+            {
+                "station": "Zábřeh na Moravě - nádr.",
+                "date": "2021-01-09T23:42:00.000+01:00"
+            },
+            {
+                "station": "Ostrava - Svinov",
+                "date": "2021-01-10T01:07:00.000+01:00"
+            }
+        ],
+        "price": 258
+    },
+    {
+        "currency": "CZK",
+        "route": [
+            {
+                "station": "Prague - main train station",
+                "date": "2021-01-09T21:50:00.000+01:00"
+            },
+            {
+                "station": "Pardubice - hl. nádraží",
+                "date": "2021-01-09T22:45:00.000+01:00"
+            },
+            {
+                "station": "Ostrava - Svinov",
+                "date": "2021-01-10T01:07:00.000+01:00"
+            }
+        ],
+        "price": 284
+    }
 ]
 ```
 
